@@ -3,7 +3,7 @@ const { connectDb } = require("./config/db");
 require('dotenv').config();
 
 // port 
-const PORT = 5454 || process.env.PORT;
+const PORT = process.env.PORT || 5454;;
 app.listen(PORT,async ()=>{
     await connectDb()
     console.log("ecommerce api listing on port ",PORT)
