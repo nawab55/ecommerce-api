@@ -51,12 +51,12 @@ const forgotPassword = async (req, res) => {
     const { email } = req.body;
     try {
         const user = await User.findOne({ email });
-        console.log("user is", user);
+        // console.log("user is", user);
         if (!user) {
             return res.status(404).json({ status: false, message: 'User not Registered' })
         }
         const token = jwt.sign({ _id: user._id }, process.env.SECERET_KEY, { expiresIn: '1h' });
-        console.log(token);
+        // console.log(token);
         var transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
@@ -69,7 +69,7 @@ const forgotPassword = async (req, res) => {
             from: process.env.Email,
             to: email,
             subject: 'Reset Password',
-            text: `https://localhost:3000/resetPassword/${token}`
+            text: `https://shopyecommerce.netlify.app/resetPassword/${token}`
         };
 
         transporter.sendMail(mailOptions, function (error, info) {
